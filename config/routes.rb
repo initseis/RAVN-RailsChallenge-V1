@@ -6,5 +6,19 @@ Rails.application.routes.draw do
   get "up" => "rails/health#show", as: :rails_health_check
 
   # Defines the root path route ("/")
-  # root "posts#index"
+  root "pokemons#index"
+
+  devise_scope :user do
+    get "/app/login" => "devise/sessions#new"
+  end
+
+  devise_for :users, only: [:sessions, :registrations, :passwords]
+
+  scope :app do
+    resources :pokemons, only: [:index, :create], path: 'pokemon' do
+      collection do
+        get 'add', to: 'pokemons#new'
+      end
+    end
+  end
 end

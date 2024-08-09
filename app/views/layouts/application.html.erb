@@ -10,7 +10,10 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
   </head>
 
-  <body>
-    <%= yield %>
+  <body class="flex flex-col text-dark h-[calc(100dvh)]">
+    <main class="flex-1">
+      <%= render partial: "shared/flash" %>
+      <%= yield %>
+    </main>
   </body>
 </html>
