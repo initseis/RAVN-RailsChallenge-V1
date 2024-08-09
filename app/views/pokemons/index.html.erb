@@ -1,1 +1,33 @@
-Pokemons
+<div class="px-12 pt-12">
+  <div class="max-w-6xl">
+    <div class="flex mb-6 justify-between items-center">
+      <h1 class="text-lg text-dark-grey">Pokemon's</h1>
+      <%= form_with url: pokemons_path, method: :get, class: "gradient-border rounded-3xl flex items-center gap-2 text-dark-grey" do |f| %>
+        <div class="size-4">
+          <%= Icon.search %>
+        </div>
+        <%= f.search_field :name_or_type, value: params[:name_or_type], placeholder: "Search a Pokemon", class: "text-sm font-light !outline-none border-none" %>
+      <% end %>
+    </div>
+
+    <div class="border-2 border-grey rounded-lg p-8">
+      <div class="flex justify-between">
+        <h2 class="text-lg text-dark-grey">Pokemon's</h2>
+        <%= link_to 'Add Pokemon', add_pokemons_path, class: 'btn w-auto' %>
+      </div>
+
+      <div class="hidden bg-water bg-fire bg-electric bg-grass"></div>
+      <div class="divTable text-dark-grey text-sm">
+        <div class="divTableBody">
+          <div class="divTableRow">
+            <div class="divTableHead font-semibold">Name</div>
+            <div class="divTableHead font-semibold">Type</div>
+            <div class="divTableHead font-semibold">Action</div>
+          </div>
+          <br>
+          <%= render @pokemons %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
