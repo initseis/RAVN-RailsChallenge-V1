@@ -2,13 +2,41 @@
 @tailwind components;
 @tailwind utilities;
 
+.divTable {
+  display: table;
+  width: 100%;
+}
+
+.divTableRow {
+  display: table-row;
+}
+
+.divTableCell,
+.divTableHead {
+  display: table-cell;
+  padding: 3px 10px;
+}
+
+.divTableBody {
+  display: table-row-group;
+}
+
+.gradient-border {
+  padding: 0.5rem;
+  border: double 1px transparent;
+  background-image: linear-gradient(white, white),
+    linear-gradient(178.18deg, #FD749B -13.56%, #281AC8 158.3%);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+}
+
 @layer components {
   .btn {
-    @apply text-white font-medium rounded-md text-sm w-full px-5 py-2 text-center cursor-pointer whitespace-nowrap block;
-    background: linear-gradient(178.18deg, #FD749B -13.56%, #281AC8 158.3%)
+    @apply text-white font-medium rounded-3xl text-sm w-full px-5 py-2 text-center cursor-pointer whitespace-nowrap block;
+    background: linear-gradient(178.18deg, #FD749B -13.56%, #281AC8 158.3%);
   }
 
   .input {
-    @apply block w-full p-2 border rounded-md text-sm !outline-none border-gray-300 focus:border-gray-400
+    @apply block w-full p-2 border rounded-md text-sm !outline-none border-gray-300 focus:border-gray-400;
   }
 }
