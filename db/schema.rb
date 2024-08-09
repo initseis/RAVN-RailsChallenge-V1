@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_09_020555) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_09_201422) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -46,6 +46,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_09_020555) do
     t.index ["name"], name: "index_countries_on_name", unique: true
   end
 
+  create_table "pokemons", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "pokemon_type", null: false
+    t.string "main_technique", null: false
+    t.text "description", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_pokemons_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "first_name", null: false
     t.string "last_name", null: false
@@ -66,5 +77,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_09_020555) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "pokemons", "users"
   add_foreign_key "users", "countries"
 end

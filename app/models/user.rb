@@ -4,6 +4,7 @@ class User < ApplicationRecord
 
   ## ASSOCIATIONS ##
   belongs_to :country
+  has_many :pokemons
 
   ## VALIDATIONS ##
   validates :first_name, presence: { allow_blank: true }
