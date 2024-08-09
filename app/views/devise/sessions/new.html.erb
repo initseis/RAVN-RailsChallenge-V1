@@ -1,6 +1,6 @@
 <div class="flex justify-center pt-6">
   <div class="w-full max-w-xs">
-    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <%= form_with model: resource, url: session_path(resource_name) do |f| %>
       <div class="mb-2">
         <%= f.email_field :email, required: true, autofocus: true, placeholder: "Email", autocomplete: "off", class: "input" %>
       </div>
@@ -16,8 +16,8 @@
         </div>
       <% end %>
 
-      <div class="btn mb-2">
-        <%= f.button "Login" %>
+      <div class="mb-2">
+        <%= f.button "Login", class: "btn" %>
       </div>
     <% end %>
 
