@@ -1,0 +1,12 @@
+require: rubocop-rails
+Style/Documentation:
+  Enabled: false
+Metrics/BlockLength:
+  Exclude:
+    - "config/**/*.rb"
+Metrics/AbcSize:
+  Exclude:
+    - "db/migrate/*.rb"
+Metrics/MethodLength:
+  Exclude:
+    - "db/migrate/*.rb"

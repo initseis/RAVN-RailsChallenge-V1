@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Pokemon < ApplicationRecord
   include Filterable
 
@@ -10,8 +12,9 @@ class Pokemon < ApplicationRecord
   validates :description, presence: { allow_blank: false }
 
   ## ENUMS ##
-  enum :pokemon_type, { fire: "fire", water: "water", grass: "grass", electric: "electric" }, default: :fire, validate: true
+  enum :pokemon_type, { fire: 'fire', water: 'water', grass: 'grass', electric: 'electric' }, default: :fire,
+                                                                                              validate: true
 
   ## SCOPES ##
-  search_scope :name_or_type, ->(text) { where("name LIKE ? OR pokemon_type LIKE ?", "%#{text}%", "%#{text}%") }
+  search_scope :name_or_type, ->(text) { where('name LIKE ? OR pokemon_type LIKE ?', "%#{text}%", "%#{text}%") }
 end

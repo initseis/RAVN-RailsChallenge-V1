@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PokemonsController < ApplicationController
   def index
     @pokemons = current_user.pokemons.filterr(filter_params)

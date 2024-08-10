@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Filterable
   extend ActiveSupport::Concern
 
@@ -14,7 +16,7 @@ module Filterable
     end
 
     def filterr(filtering_params)
-      results = self.where(nil)
+      results = where(nil)
       filtering_params.each do |key, value|
         results = results.public_send(key, value) if value.present?
       end
