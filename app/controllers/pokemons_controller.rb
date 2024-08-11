@@ -20,7 +20,7 @@ class PokemonsController < ApplicationController
   def create
     @pokemon = Pokemon.new(pokemon_params)
     if @pokemon.save
-      redirect_to pokemons_path
+      render turbo_stream: turbo_stream.action(:redirect, pokemons_path)
     else
       render turbo_stream: turbo_stream.update(:form_errors, partial: 'shared/form_errors', locals: { object: @pokemon }), # rubocop:disable Layout/LineLength
              status: :unprocessable_entity
@@ -34,7 +34,7 @@ class PokemonsController < ApplicationController
   def update
     authorize @pokemon
     if @pokemon.update(pokemon_params)
-      redirect_to pokemons_path
+      render turbo_stream: turbo_stream.action(:redirect, pokemons_path)
     else
       render turbo_stream: turbo_stream.update(:form_errors, partial: 'shared/form_errors', locals: { object: @pokemon }), # rubocop:disable Layout/LineLength
              status: :unprocessable_entity
@@ -44,7 +44,7 @@ class PokemonsController < ApplicationController
   def destroy
     authorize @pokemon
     @pokemon.destroy
-    redirect_to pokemons_path
+    render turbo_stream: turbo_stream.action(:redirect, pokemons_path)
   end
 
   private

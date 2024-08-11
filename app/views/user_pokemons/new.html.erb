@@ -1,5 +1,5 @@
 <%= turbo_frame_tag @user_pokemon do %>
-  <div tabindex="-1" aria-hidden="true" class="p-8 overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 flex justify-center items-center w-full h-full max-h-full">
+  <div data-controller="modal" data-action="click@document->modal#hide keydown.esc@document->modal#hide" tabindex="-1" aria-hidden="true" class="p-8 overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 flex justify-center items-center w-full h-full max-h-full">
     <div class="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" data-action="click->frame-modal#hideFromOutside"></div>
     <div class="relative w-full max-w-sm max-h-full">
       <%= render "form", user_pokemon: @user_pokemon %>

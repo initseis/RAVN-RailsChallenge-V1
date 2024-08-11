@@ -13,5 +13,8 @@ application.register("hello", HelloController)
 import InputSwitcherController from "./input_switcher_controller"
 application.register("input-switcher", InputSwitcherController)
 
+import ModalController from "./modal_controller"
+application.register("modal", ModalController)
+
 import NestedFormController from "./nested_form_controller"
 application.register("nested-form", NestedFormController)

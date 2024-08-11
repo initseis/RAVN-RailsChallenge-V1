@@ -21,6 +21,7 @@ class User < ApplicationRecord
   validates :email, presence: { allow_blank: false }, uniqueness: { case_sensitive: false },
                     format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i }
   validates :username, presence: { allow_blank: true }, uniqueness: { case_sensitive: false }
+  validates :username, format: { with: /^[a-zA-Z0-9_.]*$/, multiline: true }
 
   before_validation :set_username, on: :create
 
@@ -31,6 +32,12 @@ class User < ApplicationRecord
                                  OR last_name LIKE ?
                                  OR email LIKE ?', "%#{text}%", "%#{text}%", "%#{text}%")
                         }
+
+  attr_writer :login
+
+  def login
+    @login || username || email
+  end
 
   def full_name
     "#{first_name} #{last_name}".titleize
@@ -47,6 +54,16 @@ class User < ApplicationRecord
       image_url
     else
       DEFAULT_IMAGE_URL
+    end
+  end
+
+  def self.find_for_database_authentication(warden_conditions)
+    conditions = warden_conditions.dup
+    if (login = conditions.delete(:login))
+      where(conditions.to_h).where(['lower(username) = :value OR lower(email) = :value',
+                                    { value: login.downcase }]).first
+    elsif conditions.key?(:username) || conditions.key?(:email)
+      where(conditions.to_h).first
     end
   end
 

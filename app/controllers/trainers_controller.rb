@@ -25,7 +25,7 @@ class TrainersController < ApplicationController
     @trainer = User.new(trainer_params.merge(password: SecureRandom.hex(8)))
     authorize :trainer, :create?
     if @trainer.save
-      redirect_to trainers_path
+      render turbo_stream: turbo_stream.action(:redirect, trainers_path)
     else
       render turbo_stream: turbo_stream.update(:form_errors, partial: 'shared/form_errors', locals: { object: @trainer }), # rubocop:disable Layout/LineLength
              status: :unprocessable_entity
@@ -39,7 +39,7 @@ class TrainersController < ApplicationController
   def update
     authorize :trainer, :update?
     if @trainer.update(trainer_params)
-      redirect_to trainers_path
+      render turbo_stream: turbo_stream.action(:redirect, trainers_path)
     else
       render turbo_stream: turbo_stream.update(:form_errors, partial: 'shared/form_errors', locals: { object: @trainer }), # rubocop:disable Layout/LineLength
              status: :unprocessable_entity
@@ -49,7 +49,7 @@ class TrainersController < ApplicationController
   def destroy
     authorize :trainer, :destroy?
     @trainer.destroy
-    redirect_to trainers_path
+    render turbo_stream: turbo_stream.action(:redirect, trainers_path)
   end
 
   private

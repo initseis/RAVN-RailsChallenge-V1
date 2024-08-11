@@ -1,6 +1,6 @@
 <div class="w-full flex justify-center">
   <div class="w-full max-w-md flex flex-col items-center bg-white border-2 border-grey rounded-lg px-2 py-4">
-    <%= image_tag @pokemon.image.attached? ? @pokemon.image : @pokemon.image_url, class: "w-32 rounded-full mb-2 aspect-square object-cover" %>
+    <%= image_tag @pokemon.image_file, class: "w-32 rounded-full mb-2 aspect-square object-cover" %>
     <h1 class="text-black text-lg font-semibold mb-2"><%= @pokemon.name %></h1>
     <div class="bg-<%= @pokemon.pokemon_type %> text-white type-badge mb-2"><%= @pokemon.pokemon_type %></div>
     <h2 class="mb-2"><%= @pokemon.main_technique %></h2>

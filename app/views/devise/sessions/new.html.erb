@@ -2,7 +2,7 @@
   <div class="w-full max-w-xs">
     <%= form_with model: resource, url: session_path(resource_name), data: { turbo: false } do |f| %>
       <div class="mb-2">
-        <%= f.email_field :email, required: true, autofocus: true, placeholder: "Email", autocomplete: "off", class: "input" %>
+        <%= f.text_field :login, required: true, autofocus: true, placeholder: "Email or username", autocomplete: "off", class: "input" %>
       </div>
 
       <div class="mb-2">

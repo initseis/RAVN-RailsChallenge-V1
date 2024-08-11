@@ -4,8 +4,15 @@
     Pokemons
   <% end %>
 
-  <%= active_link_to trainers_path, class: "" do %>
-    <span class=""><%= Icon.trainers %></span>
-    Trainers
+  <% if current_user.admin? %>
+    <%= active_link_to trainers_path, class: "" do %>
+      <span class=""><%= Icon.trainers %></span>
+      Trainers
+    <% end %>
+  <% else %>
+    <%= active_link_to trainer_path(current_user), class: "" do %>
+      <span class=""><%= Icon.trainers %></span>
+      Trainer
+    <% end %>
   <% end %>
 </section>

@@ -1,4 +1,4 @@
-<%= form_with model: user_pokemon, class: "bg-white p-3 rounded-lg flex flex-col items-center" do |f| %>
+<%= form_with model: user_pokemon, data: { modal_target: "content" }, class: "bg-white p-3 rounded-lg flex flex-col items-center" do |f| %>
   <%= turbo_frame_tag :form_errors do %>
     <%= render partial: "shared/form_errors", locals: { object: f.object } %>
   <% end %>
