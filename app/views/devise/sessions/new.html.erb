@@ -1,6 +1,6 @@
 <div class="flex justify-center pt-6">
   <div class="w-full max-w-xs">
-    <%= form_with model: resource, url: session_path(resource_name) do |f| %>
+    <%= form_with model: resource, url: session_path(resource_name), data: { turbo: false } do |f| %>
       <div class="mb-2">
         <%= f.email_field :email, required: true, autofocus: true, placeholder: "Email", autocomplete: "off", class: "input" %>
       </div>
