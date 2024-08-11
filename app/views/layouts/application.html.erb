@@ -12,9 +12,13 @@
 
   <body class="flex flex-col text-dark h-[calc(100dvh)] bg-[#fff9fe] text-dark-grey">
     <%= render partial: "shared/flash" %>
-    <main class="flex-1 pl-12 pt-12">
-      <%= yield %>
-    </main>
+    <%= render "shared/header" if current_user %>
+    <div class="flex-1 flex">
+      <%= render "shared/sidebar" if current_user %>
+      <main class="w-full pt-12 pl-12">
+        <%= yield %>
+      </main>
+    </div>
     <div class="hidden bg-water bg-fire bg-electric bg-grass"></div>
   </body>
 </html>

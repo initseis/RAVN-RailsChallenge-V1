@@ -31,8 +31,12 @@
 }
 
 @layer components {
+  .default-btn {
+      @apply font-medium rounded-3xl text-sm w-full px-5 py-2 text-center cursor-pointer whitespace-nowrap block flex items-center gap-2;
+    }
+
   .btn {
-    @apply text-white font-medium rounded-3xl text-sm w-full px-5 py-2 text-center cursor-pointer whitespace-nowrap block;
+    @apply text-white default-btn;
     background: linear-gradient(178.18deg, #FD749B -13.56%, #281AC8 158.3%);
   }
 
@@ -46,5 +50,14 @@
 
   .type-badge {
     @apply rounded-xl py-1 px-2 text-sm
+  }
+
+  .active-link {
+    @apply default-btn rounded-l-none text-white !stroke-white;
+    background: linear-gradient(178.18deg, #FD749B -13.56%, #281AC8 158.3%);
+  }
+
+  .inactive-link {
+    @apply !stroke-[#cd60a5] default-btn rounded-l-none;
   }
 }

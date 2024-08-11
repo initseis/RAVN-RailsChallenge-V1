@@ -4,6 +4,7 @@ class User < ApplicationRecord
   include Filterable
 
   INACTIVITY_THRESHOLD = 1.week
+  DEFAULT_IMAGE_URL = '/images/default_avatar.png'
 
   devise :database_authenticatable, :recoverable, :rememberable
   has_one_attached :image do |attachable|
@@ -37,6 +38,16 @@ class User < ApplicationRecord
 
   def last_pokemon_caught_at
     user_pokemons.last.created_at
+  end
+
+  def image_file(size = :small)
+    if image.attached?
+      image.variant(size)
+    elsif image_url.present?
+      image_url
+    else
+      DEFAULT_IMAGE_URL
+    end
   end
 
   private
