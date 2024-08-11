@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_09_201422) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_11_010429) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -46,15 +46,34 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_09_201422) do
     t.index ["name"], name: "index_countries_on_name", unique: true
   end
 
+  create_table "pokemon_countries", force: :cascade do |t|
+    t.integer "pokemon_id", null: false
+    t.integer "country_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["country_id"], name: "index_pokemon_countries_on_country_id"
+    t.index ["pokemon_id"], name: "index_pokemon_countries_on_pokemon_id"
+  end
+
   create_table "pokemons", force: :cascade do |t|
     t.string "name", null: false
     t.string "pokemon_type", null: false
     t.string "main_technique", null: false
+    t.string "image_url"
     t.text "description", null: false
     t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_pokemons_on_user_id"
+  end
+
+  create_table "pokemons_and_countries", force: :cascade do |t|
+    t.integer "pokemon_id", null: false
+    t.integer "country_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["country_id"], name: "index_pokemons_and_countries_on_country_id"
+    t.index ["pokemon_id"], name: "index_pokemons_and_countries_on_pokemon_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -77,6 +96,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_09_201422) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "pokemon_countries", "countries"
+  add_foreign_key "pokemon_countries", "pokemons"
   add_foreign_key "pokemons", "users"
+  add_foreign_key "pokemons_and_countries", "countries"
+  add_foreign_key "pokemons_and_countries", "pokemons"
   add_foreign_key "users", "countries"
 end

@@ -1,0 +1,64 @@
+<%= form_with model: pokemon, data: { controller: "nested-form" }, class: "p-3" do |f| %>
+  <%= turbo_frame_tag :form_errors do %>
+    <%= render partial: "shared/form_errors", locals: { object: f.object } %>
+  <% end %>
+  <div class="mb-2">
+    <%= f.label :name, class: "label" %>
+    <%= f.text_field :name, required: true, class: "input" %>
+  </div>
+  <div class="mb-2">
+    <%= f.label :main_technique, class: "label" %>
+    <%= f.text_field :main_technique, required: true, class: "input" %>
+  </div>
+
+  <div class="mb-2" data-controller="input-switcher">
+    <div class="flex gap-4">
+      <div class="">
+        <input class="cursor-pointer" type="radio" id="pokemon_image_radio" name="image" autocomplete="off" <%= "checked" if f.object.image.attached? || f.object.new_record? %> data-input-switcher-id-param="pokemon_image" data-action="input-switcher#switch">
+        <label for="pokemon_image_radio" class="label cursor-pointer">Image</label>
+      </div>
+      <div class="">
+        <input class="cursor-pointer" type="radio" id="pokemon_image_url_radio" name="image" autocomplete="off" <%= "checked" if f.object.image_url.present? %> data-input-switcher-id-param="pokemon_image_url" data-action="input-switcher#switch">
+        <label for="pokemon_image_url_radio" class="label cursor-pointer">Image URL</label>
+      </div>
+    </div>
+    <div class="flex flex-col">
+
+      <% if f.object.image.attached? %>
+        <%= f.hidden_field :image, value: f.object.image.signed_id, data: { input_switcher_target: "input" }, class: "" %>
+      <% end %>
+
+      <%= f.file_field :image, disabled: false, data: { input_switcher_target: "input" }, class: "#{"hidden" if !f.object.image.attached? && f.object.persisted?}" %>
+      <%= f.text_field :image_url, disabled: f.object.image_url.blank?, data: { input_switcher_target: "input" }, class: "input #{"hidden" unless f.object.image_url.present?}" %>
+
+    </div>
+  </div>
+
+  <template data-nested-form-target="template">
+    <%= f.fields_for :pokemon_countries, PokemonCountry.new, child_index: "NEW_RECORD" do |pokemon_country| %>
+      <%= render "pokemon_country_form", f: pokemon_country %>
+    <% end %>
+  </template>
+
+  <%= f.fields_for :pokemon_countries do |pokemon_country| %>
+    <%= render "pokemon_country_form", f: pokemon_country %>
+  <% end %>
+
+  <div data-nested-form-target="target"></div>
+
+  <div class="flex justify-end">
+    <button type="button" data-action="click->nested-form#add" class="btn bg-green-dark hover:bg-green-light w-auto py-1">
+      Add country
+    </button>
+  </div>
+
+  <div class="mb-2">
+    <%= f.label :pokemon_type, class: "label" %>
+    <%= f.select :pokemon_type, Pokemon.pokemon_types.keys.map { |type| [type, type] }, { include_blank: false }, class: "input" %>
+  </div>
+  <div class="mb-2">
+    <%= f.label :description, class: "label" %>
+    <%= f.text_area :description, required: true, class: "input" %>
+  </div>
+  <%= f.button "Save", class: "btn" %>
+<% end %>

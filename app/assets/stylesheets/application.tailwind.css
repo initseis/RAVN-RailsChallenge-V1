@@ -36,7 +36,15 @@
     background: linear-gradient(178.18deg, #FD749B -13.56%, #281AC8 158.3%);
   }
 
+  .label {
+    @apply text-sm font-light
+  }
+
   .input {
-    @apply block w-full p-2 border rounded-md text-sm !outline-none border-gray-300 focus:border-gray-400;
+    @apply block w-full p-2 border text-sm !outline-none border-gray-300 focus:border-gray-400 rounded-3xl resize-none;
+  }
+
+  .type-badge {
+    @apply rounded-xl py-1 px-2 text-sm
   }
 }

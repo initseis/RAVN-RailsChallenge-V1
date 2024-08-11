@@ -9,3 +9,9 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+
+Country.create!(name: 'Kanto')
+Country.create!(name: 'Johto')
+Country.create!(name: 'Hoenn')
+User.create!(first_name: 'Ash', last_name: 'Ketchum', email: 'ash@gmail.com', password: 'k234234234',
+             country: Country.first, role: :admin)

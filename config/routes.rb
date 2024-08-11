@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   devise_for :users, only: %i[sessions registrations passwords]
 
   scope :app do
-    resources :pokemons, only: %i[index create], path: 'pokemon' do
+    resources :pokemons, only: %i[index show create edit update destroy], path: 'pokemon' do
       collection do
         get 'add', to: 'pokemons#new'
       end

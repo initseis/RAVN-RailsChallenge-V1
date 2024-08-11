@@ -6,6 +6,7 @@ class CreatePokemons < ActiveRecord::Migration[7.1]
       t.string :name, null: false
       t.string :pokemon_type, null: false
       t.string :main_technique, null: false
+      t.string :image_url
       t.text :description, null: false
       t.references :user, null: false, foreign_key: true
 

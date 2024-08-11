@@ -6,3 +6,9 @@ import { application } from "./application"
 
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
+
+import InputSwitcherController from "./input_switcher_controller"
+application.register("input-switcher", InputSwitcherController)
+
+import NestedFormController from "./nested_form_controller"
+application.register("nested-form", NestedFormController)
