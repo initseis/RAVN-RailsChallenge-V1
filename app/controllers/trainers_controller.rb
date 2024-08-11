@@ -6,7 +6,8 @@ class TrainersController < ApplicationController
   before_action :set_trainer, only: %i[show edit update destroy]
   def index
     authorize :trainer, :index?
-    @trainers = User.trainer.filterr(filter_params)
+    trainers = User.trainer.filterr(filter_params)
+    @pagy, @trainers = pagy(trainers)
   end
 
   def show
@@ -56,6 +57,7 @@ class TrainersController < ApplicationController
   def filter_params
     params.permit(:search)
   end
+  helper_method :filter_params
 
   def trainer_params
     params.require(:trainer)

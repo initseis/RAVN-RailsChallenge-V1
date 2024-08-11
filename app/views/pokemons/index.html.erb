@@ -18,7 +18,7 @@
     </div>
 
     <div class="divTable text-dark-grey text-sm">
-      <div class="divTableBody">
+      <%= turbo_frame_tag :pokemons, class: "divTableBody" do %>
         <div class="divTableRow">
           <div class="divTableHead font-semibold">Name</div>
           <div class="divTableHead font-semibold">Type</div>
@@ -26,7 +26,8 @@
         </div>
         <br>
         <%= render @pokemons %>
-      </div>
+      <% end %>
     </div>
+    <%= render "shared/pager", pagy: @pagy, path: pokemons_path, parameters: filter_params.merge({ page: @pagy.next }) %>
   </div>
 </div>

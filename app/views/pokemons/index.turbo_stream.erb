@@ -1,0 +1,7 @@
+<%= turbo_stream.append :pokemons do %>
+  <%= render @pokemons %>
+<% end %>
+
+<%= turbo_stream.replace "pager" do %>
+  <%= render "shared/pager", pagy: @pagy, path: pokemons_path, parameters: filter_params.merge({ page: @pagy.next }) %>
+<% end %>

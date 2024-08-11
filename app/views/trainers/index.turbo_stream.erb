@@ -1,0 +1,7 @@
+<%= turbo_stream.append :trainers do %>
+  <%= render collection: @trainers, partial: 'trainer' %>
+<% end %>
+
+<%= turbo_stream.replace "pager" do %>
+  <%= render "shared/pager", pagy: @pagy, path: trainers_path, parameters: filter_params.merge({ page: @pagy.next }) %>
+<% end %>

@@ -5,7 +5,8 @@ require 'open-uri'
 class PokemonsController < ApplicationController
   before_action :set_pokemon, only: %i[show edit update destroy]
   def index
-    @pokemons = (current_user.admin? ? Pokemon.all : current_user.pokemons).filterr(filter_params)
+    pokemons = (current_user.admin? ? Pokemon.all : current_user.pokemons).filterr(filter_params)
+    @pagy, @pokemons = pagy(pokemons)
   end
 
   def show; end
@@ -51,6 +52,7 @@ class PokemonsController < ApplicationController
   def filter_params
     params.permit(:search)
   end
+  helper_method :filter_params
 
   def pokemon_params
     params.require(:pokemon)

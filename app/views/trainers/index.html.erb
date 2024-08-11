@@ -16,7 +16,7 @@
     </div>
 
     <div class="divTable text-dark-grey text-sm">
-      <div class="divTableBody">
+      <%= turbo_frame_tag :trainers, class: "divTableBody" do %>
         <div class="divTableRow">
           <div class="divTableHead font-semibold">Name</div>
           <div class="divTableHead font-semibold">Email</div>
@@ -24,7 +24,8 @@
         </div>
         <br>
         <%= render collection: @trainers, partial: 'trainer' %>
-      </div>
+      <% end %>
     </div>
+    <%= render "shared/pager", pagy: @pagy, path: trainers_path, parameters: filter_params.merge({ page: @pagy.next }) %>
   </div>
 </div>

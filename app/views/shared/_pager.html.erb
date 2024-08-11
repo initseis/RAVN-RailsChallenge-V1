@@ -1,0 +1,10 @@
+<div id="pager" class="flex justify-center mt-6">
+  <% if pagy.next.present? %>
+    <%= button_to "View More",
+                path,
+                method: :get,
+                params: defined?(parameters) ? parameters : { page: pagy.next },
+                class: "btn",
+                data: { turbo_stream: "" } %>
+  <% end %>
+</div>
