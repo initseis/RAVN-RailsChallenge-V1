@@ -5,14 +5,16 @@
       <div class="size-4">
         <%= Icon.search %>
       </div>
-      <%= f.search_field :name_or_type, value: params[:name_or_type], placeholder: "Search a Pokemon", class: "text-sm font-light !outline-none border-none" %>
+      <%= f.search_field :search, value: params[:search], placeholder: "Search a Pokemon", class: "text-sm font-light !outline-none border-none" %>
     <% end %>
   </div>
 
   <div class="border-2 border-grey rounded-lg p-8">
     <div class="flex justify-between">
       <h2 class="text-lg text-dark-grey">Pokemon's</h2>
-      <%= link_to 'Add Pokemon', add_pokemons_path, class: 'btn w-auto' %>
+      <% if PokemonPolicy.new(current_user, Pokemon.new).new? %>
+        <%= link_to 'Add Pokemon', add_pokemons_path, class: 'btn w-auto' %>
+      <% end %>
     </div>
 
     <div class="divTable text-dark-grey text-sm">

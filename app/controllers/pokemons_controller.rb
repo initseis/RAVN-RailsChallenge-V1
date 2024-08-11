@@ -5,13 +5,14 @@ require 'open-uri'
 class PokemonsController < ApplicationController
   before_action :set_pokemon, only: %i[show edit update destroy]
   def index
-    @pokemons = Pokemon.filterr(filter_params)
+    @pokemons = (current_user.admin? ? Pokemon.all : current_user.pokemons).filterr(filter_params)
   end
 
   def show; end
 
   def new
     @pokemon = Pokemon.new
+    authorize @pokemon
     @pokemon.pokemon_countries.build
   end
 
@@ -25,9 +26,12 @@ class PokemonsController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit
+    authorize @pokemon
+  end
 
   def update
+    authorize @pokemon
     if @pokemon.update(pokemon_params)
       redirect_to pokemons_path
     else
@@ -37,6 +41,7 @@ class PokemonsController < ApplicationController
   end
 
   def destroy
+    authorize @pokemon
     @pokemon.destroy
     redirect_to pokemons_path
   end
@@ -44,7 +49,7 @@ class PokemonsController < ApplicationController
   private
 
   def filter_params
-    params.permit(:name_or_type)
+    params.permit(:search)
   end
 
   def pokemon_params

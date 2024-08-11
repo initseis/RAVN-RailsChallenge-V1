@@ -1,0 +1,14 @@
+<%= form_with model: user_pokemon, class: "bg-white p-3 rounded-lg flex flex-col items-center" do |f| %>
+  <%= turbo_frame_tag :form_errors do %>
+    <%= render partial: "shared/form_errors", locals: { object: f.object } %>
+  <% end %>
+
+  <%= f.select :pokemon_id, Pokemon.all.map { |pokemon| [pokemon.name, pokemon.id] }, { include_blank: false }, class: "input" %>
+
+  <div class="mb-2 w-full">
+    <%= f.label :alias, class: "label" %>
+    <%= f.text_field :alias, placeholder: "Optional", class: "input" %>
+  </div>
+
+  <%= f.button "Save", class: "btn" %>
+<% end %>

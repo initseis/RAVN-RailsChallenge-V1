@@ -5,18 +5,24 @@ require 'open-uri'
 class TrainersController < ApplicationController
   before_action :set_trainer, only: %i[show edit update destroy]
   def index
+    authorize :trainer, :index?
     @trainers = User.trainer.filterr(filter_params)
   end
 
-  def show; end
+  def show
+    # authorize [:trainer, current_user], :show?
+    redirect_to root_path unless TrainerPolicy.new(current_user, @trainer).show?
+  end
 
   def new
     @trainer = User.new
+    authorize :trainer, :new?
     @trainer.user_pokemons.build
   end
 
   def create
-    @trainer = User.new(trainer_params)
+    @trainer = User.new(trainer_params.merge(password: SecureRandom.hex(8)))
+    authorize :trainer, :create?
     if @trainer.save
       redirect_to trainers_path
     else
@@ -25,9 +31,12 @@ class TrainersController < ApplicationController
     end
   end
 
-  def edit; end
+  def edit
+    authorize :trainer, :edit?
+  end
 
   def update
+    authorize :trainer, :update?
     if @trainer.update(trainer_params)
       redirect_to trainers_path
     else
@@ -37,6 +46,7 @@ class TrainersController < ApplicationController
   end
 
   def destroy
+    authorize :trainer, :destroy?
     @trainer.destroy
     redirect_to trainers_path
   end
@@ -51,8 +61,7 @@ class TrainersController < ApplicationController
     params.require(:trainer)
           .permit(:first_name, :last_name, :email, :country_id,
                   user_pokemons_attributes: %i[pokemon_id _destroy])
-          .merge(image: params[:trainer][:image], image_url: params[:trainer][:image_url],
-                 password: SecureRandom.hex(8))
+          .merge(image: params[:trainer][:image], image_url: params[:trainer][:image_url])
   end
 
   def set_trainer

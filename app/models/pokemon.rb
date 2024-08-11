@@ -19,7 +19,7 @@ class Pokemon < ApplicationRecord
   enum :pokemon_type, { fire: 'fire', water: 'water', grass: 'grass', electric: 'electric' }, default: :fire,
                                                                                               validate: true
 
-  search_scope :name_or_type, ->(text) { where('name LIKE ? OR pokemon_type LIKE ?', "%#{text}%", "%#{text}%") }
+  search_scope :search, ->(text) { where('name LIKE ? OR pokemon_type LIKE ?', "%#{text}%", "%#{text}%") }
 
   def countries_names
     pokemon_countries.includes(:country).pluck(:name).to_sentence

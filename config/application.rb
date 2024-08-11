@@ -25,5 +25,11 @@ module RavnRailsChallengeV1
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    # Set solid_queue as the default queue adapter
+    config.active_job.queue_adapter = :solid_queue
+
+    # Set the base controller class for MissionControl
+    MissionControl::Jobs.base_controller_class = 'MissionControlController'
   end
 end
