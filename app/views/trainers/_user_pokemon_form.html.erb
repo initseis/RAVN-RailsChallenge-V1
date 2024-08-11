@@ -1,0 +1,10 @@
+<div class="rounded-md mb-2 nested-form-wrapper relative" data-new-record="<%= f.object.new_record? %>">
+  <div class="mb-2">
+    <%= f.select :pokemon_id, Pokemon.all.map { |c| [c.name, c.id] }, { include_blank: false }, class: "input" %>
+  </div>
+  
+  <div class="size-6 rounded-full bg-red-500 text-white absolute -top-3 -right-3 cursor-pointer p-2" data-action="click->nested-form#remove">
+    <%= Icon.close %>
+    <%= f.hidden_field :_destroy %>
+  </div>
+</div>

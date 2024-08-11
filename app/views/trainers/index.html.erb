@@ -1,0 +1,30 @@
+<div class="max-w-6xl">
+  <div class="flex mb-6 justify-between items-center">
+    <h1 class="text-lg text-dark-grey">Trainer's</h1>
+    <%= form_with url: trainers_path, method: :get, class: "gradient-border rounded-3xl flex items-center gap-2 text-dark-grey" do |f| %>
+      <div class="size-4">
+        <%= Icon.search %>
+      </div>
+      <%= f.search_field :search, value: params[:search], placeholder: "Search a Trainer", class: "text-sm font-light !outline-none border-none" %>
+    <% end %>
+  </div>
+
+  <div class="border-2 border-grey rounded-lg p-8">
+    <div class="flex justify-between">
+      <h2 class="text-lg text-dark-grey">Trainer's</h2>
+      <%= link_to 'Add Trainer', add_trainers_path, class: 'btn w-auto' %>
+    </div>
+
+    <div class="divTable text-dark-grey text-sm">
+      <div class="divTableBody">
+        <div class="divTableRow">
+          <div class="divTableHead font-semibold">Name</div>
+          <div class="divTableHead font-semibold">Email</div>
+          <div class="divTableHead font-semibold">Action</div>
+        </div>
+        <br>
+        <%= render collection: @trainers, partial: 'trainer' %>
+      </div>
+    </div>
+  </div>
+</div>

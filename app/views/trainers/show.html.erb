@@ -1,0 +1,9 @@
+<div class="w-full flex justify-center">
+  <div class="w-full max-w-md flex flex-col items-center bg-white border-2 border-grey rounded-lg px-2 py-4">
+    <%= image_tag @trainer.image.attached? ? @trainer.image : @trainer.image_url, class: "w-32 rounded-full mb-2 aspect-square object-cover" %>
+    <h1 class="text-black text-lg font-semibold mb-2"><%= @trainer.full_name %></h1>
+    <h2 class="mb-2"><%= @trainer.email %></h2>
+    <h2 class="mb-2 flex items-center"><div class="size-4"><%= Icon.location %></div><%= @trainer.country.name %></h2>
+    <p class="text-sm"><%= @trainer.pokemons_names %></p>
+  </div>
+</div>

@@ -22,5 +22,11 @@ Rails.application.routes.draw do
         get 'add', to: 'pokemons#new'
       end
     end
+
+    resources :trainers, only: %i[index show create edit update destroy], path: 'trainer' do
+      collection do
+        get 'add', to: 'trainers#new'
+      end
+    end
   end
 end
