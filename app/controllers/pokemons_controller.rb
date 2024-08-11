@@ -12,11 +12,10 @@ class PokemonsController < ApplicationController
 
   def new
     @pokemon = Pokemon.new
-    @pokemon.image = nil
+    @pokemon.pokemon_countries.build
   end
 
   def create
-    # @pokemon = Pokemons::CreatorService.new(pokemon_params).call
     @pokemon = Pokemon.new(pokemon_params)
     if @pokemon.save
       redirect_to pokemons_path
@@ -29,7 +28,6 @@ class PokemonsController < ApplicationController
   def edit; end
 
   def update
-    # @pokemon = Pokemons::UpdaterService.new(@pokemon, pokemon_params).call
     if @pokemon.update(pokemon_params)
       redirect_to pokemons_path
     else
@@ -53,8 +51,7 @@ class PokemonsController < ApplicationController
     params.require(:pokemon)
           .permit(:name, :main_technique, :country_id, :pokemon_type, :description,
                   pokemon_countries_attributes: %i[country_id _destroy])
-          .merge(image: params[:pokemon][:image])
-          .merge(image_url: params[:pokemon][:image_url])
+          .merge(image: params[:pokemon][:image], image_url: params[:pokemon][:image_url])
   end
 
   def set_pokemon

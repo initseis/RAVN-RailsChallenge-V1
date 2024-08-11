@@ -13,5 +13,7 @@
 Country.create!(name: 'Kanto')
 Country.create!(name: 'Johto')
 Country.create!(name: 'Hoenn')
-User.create!(first_name: 'Ash', last_name: 'Ketchum', email: 'ash@gmail.com', password: 'k234234234',
+User.create!(first_name: 'Sam', last_name: 'Sepiol', email: 'sam@gmail.com', password: 'k234234234',
              country: Country.first, role: :admin)
+User.create!(first_name: 'Ash', last_name: 'Ketchum', email: 'ash@gmail.com', password: 'k234234234',
+             country: Country.first, role: :trainer)

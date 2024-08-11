@@ -4,6 +4,7 @@ class Pokemon < ApplicationRecord
   include Filterable
 
   has_many :pokemon_countries, dependent: :destroy
+  has_many :user_pokemons, dependent: :destroy
   has_one_attached :image do |attachable|
     attachable.variant :small, resize_to_fill: [256, 256], preprocessed: true
   end

@@ -28,7 +28,7 @@
         <%= f.hidden_field :image, value: f.object.image.signed_id, data: { input_switcher_target: "input" }, class: "" %>
       <% end %>
 
-      <%= f.file_field :image, disabled: false, data: { input_switcher_target: "input" }, class: "#{"hidden" if !f.object.image.attached? && f.object.persisted?}" %>
+      <%= f.file_field :image, disabled: false, required: f.object.new_record?, data: { input_switcher_target: "input" }, class: "#{"hidden" if !f.object.image.attached? && f.object.persisted?}" %>
       <%= f.text_field :image_url, disabled: f.object.image_url.blank?, data: { input_switcher_target: "input" }, class: "input #{"hidden" unless f.object.image_url.present?}" %>
 
     </div>
@@ -40,6 +40,7 @@
     <% end %>
   </template>
 
+  <p class="label">Countries</p>
   <%= f.fields_for :pokemon_countries do |pokemon_country| %>
     <%= render "pokemon_country_form", f: pokemon_country %>
   <% end %>

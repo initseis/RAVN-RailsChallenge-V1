@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_08_11_010429) do
+ActiveRecord::Schema[7.1].define(version: 2024_08_11_043239) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -74,10 +74,20 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_11_010429) do
     t.index ["pokemon_id"], name: "index_pokemons_and_countries_on_pokemon_id"
   end
 
+  create_table "user_pokemons", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "pokemon_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["pokemon_id"], name: "index_user_pokemons_on_pokemon_id"
+    t.index ["user_id"], name: "index_user_pokemons_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "first_name", null: false
     t.string "last_name", null: false
     t.string "role", null: false
+    t.string "image_url"
     t.string "username"
     t.integer "country_id", null: false
     t.string "email", null: false
@@ -98,5 +108,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_11_010429) do
   add_foreign_key "pokemon_countries", "pokemons"
   add_foreign_key "pokemons_and_countries", "countries"
   add_foreign_key "pokemons_and_countries", "pokemons"
+  add_foreign_key "user_pokemons", "pokemons"
+  add_foreign_key "user_pokemons", "users"
   add_foreign_key "users", "countries"
 end
