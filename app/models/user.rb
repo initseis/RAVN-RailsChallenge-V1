@@ -3,7 +3,7 @@
 class User < ApplicationRecord
   include Filterable
 
-  INACTIVITY_THRESHOLD = 20.seconds
+  INACTIVITY_THRESHOLD = 1.week
 
   devise :database_authenticatable, :recoverable, :rememberable
   has_one_attached :image do |attachable|
