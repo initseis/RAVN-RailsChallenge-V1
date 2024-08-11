@@ -4,7 +4,6 @@ class User < ApplicationRecord
   devise :database_authenticatable, :recoverable, :rememberable
 
   belongs_to :country
-  has_many :pokemons, dependent: :destroy
 
   validates :first_name, presence: { allow_blank: true }
   validates :last_name, presence: { allow_blank: true }

@@ -5,7 +5,7 @@ require 'open-uri'
 class PokemonsController < ApplicationController
   before_action :set_pokemon, only: %i[show edit update destroy]
   def index
-    @pokemons = current_user.pokemons.filterr(filter_params)
+    @pokemons = Pokemon.filterr(filter_params)
   end
 
   def show; end
@@ -53,12 +53,11 @@ class PokemonsController < ApplicationController
     params.require(:pokemon)
           .permit(:name, :main_technique, :country_id, :pokemon_type, :description,
                   pokemon_countries_attributes: %i[country_id _destroy])
-          .merge(user: current_user)
           .merge(image: params[:pokemon][:image])
           .merge(image_url: params[:pokemon][:image_url])
   end
 
   def set_pokemon
-    @pokemon = current_user.pokemons.find_by(id: params[:id])
+    @pokemon = Pokemon.find_by(id: params[:id])
   end
 end

@@ -61,10 +61,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_11_010429) do
     t.string "main_technique", null: false
     t.string "image_url"
     t.text "description", null: false
-    t.integer "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_pokemons_on_user_id"
   end
 
   create_table "pokemons_and_countries", force: :cascade do |t|
@@ -98,7 +96,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_11_010429) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "pokemon_countries", "countries"
   add_foreign_key "pokemon_countries", "pokemons"
-  add_foreign_key "pokemons", "users"
   add_foreign_key "pokemons_and_countries", "countries"
   add_foreign_key "pokemons_and_countries", "pokemons"
   add_foreign_key "users", "countries"
