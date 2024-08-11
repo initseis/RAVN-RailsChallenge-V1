@@ -52,7 +52,7 @@ gem 'image_processing', '~> 1.2'
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[mri windows]
-  gem "pry-byebug"
+  gem 'pry-byebug'
 end
 
 group :development do
@@ -74,9 +74,9 @@ group :test do
 end
 
 gem 'devise'
-gem 'rubocop-rails', require: false
-gem 'pundit'
-gem 'solid_queue'
 gem 'dotenv-rails'
 gem 'mission_control-jobs'
 gem 'pagy'
+gem 'pundit'
+gem 'rubocop-rails', require: false
+gem 'solid_queue'

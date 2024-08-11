@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateUserPokemons < ActiveRecord::Migration[7.1]
   def change
     create_table :user_pokemons do |t|

@@ -63,6 +63,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_11_173044) do
     t.text "description", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["name"], name: "index_pokemons_on_name"
+    t.index ["pokemon_type"], name: "index_pokemons_on_pokemon_type"
   end
 
   create_table "pokemons_and_countries", force: :cascade do |t|
@@ -203,7 +205,10 @@ ActiveRecord::Schema[7.1].define(version: 2024_08_11_173044) do
     t.datetime "updated_at", null: false
     t.index ["country_id"], name: "index_users_on_country_id"
     t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["first_name"], name: "index_users_on_first_name"
+    t.index ["last_name"], name: "index_users_on_last_name"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["username"], name: "index_users_on_username", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

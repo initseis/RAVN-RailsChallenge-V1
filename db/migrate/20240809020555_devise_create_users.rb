@@ -7,7 +7,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.1]
       t.string :last_name, null: false, index: true
       t.string :role, null: false
       t.string :image_url
-      t.string :username
+      t.string :username, index: { unique: true }
       t.references :country, null: false, foreign_key: true
       ## Database authenticatable
       t.string :email,              null: false
