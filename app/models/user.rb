@@ -16,14 +16,16 @@ class User < ApplicationRecord
   belongs_to :country
   accepts_nested_attributes_for :user_pokemons, reject_if: :all_blank, allow_destroy: true
 
-  validates :first_name, presence: { allow_blank: true }
-  validates :last_name, presence: { allow_blank: true }
+  validates :first_name, presence: { allow_blank: false }
+  validates :last_name, presence: { allow_blank: false }
   validates :email, presence: { allow_blank: false }, uniqueness: { case_sensitive: false },
                     format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i }
   validates :username, presence: { allow_blank: true }, uniqueness: { case_sensitive: false }
   validates :username, format: { with: /^[a-zA-Z0-9_.]*$/, multiline: true }
+  validates :password, presence: { allow_blank: false }, if: :new_record?
 
   before_validation :set_username, on: :create
+  before_save :delete_pokemons
 
   enum :role, { trainer: 'trainer', admin: 'admin' }, default: :trainer, validate: true
 
@@ -71,5 +73,9 @@ class User < ApplicationRecord
 
   def set_username
     self.username = "#{first_name}_#{Random.hex(4)}" if username.blank?
+  end
+
+  def delete_pokemons
+    user_pokemons.all.destroy_all unless user_pokemons.all == user_pokemons
   end
 end

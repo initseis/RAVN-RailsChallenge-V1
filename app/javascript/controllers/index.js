@@ -13,6 +13,9 @@ application.register("flash", FlashController)
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
 
+import ImagePreviewController from "./image_preview_controller"
+application.register("image-preview", ImagePreviewController)
+
 import InputSwitcherController from "./input_switcher_controller"
 application.register("input-switcher", InputSwitcherController)
 

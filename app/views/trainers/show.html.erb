@@ -6,7 +6,7 @@
     <h2 class="mb-2 flex items-center"><div class="size-4"><%= Icon.location %></div><%= @trainer.country.name %></h2>
     <div class="flex justify-center flex-wrap gap-2 mb-2">
       <% @trainer.user_pokemons.includes(:pokemon).each do |user_pokemon| %>
-        <%= image_tag user_pokemon.pokemon.image.attached? ? user_pokemon.pokemon.image : user_pokemon.pokemon.image_url, class: "size-12 rounded-full aspect-square object-cover" %>
+        <%= image_tag user_pokemon.pokemon.image_file, class: "size-12 rounded-full aspect-square object-cover" %>
       <% end %>
     </div>
     <% if current_user == @trainer && Pokemon.exists? %>
