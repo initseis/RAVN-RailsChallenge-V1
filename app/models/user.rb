@@ -25,7 +25,6 @@ class User < ApplicationRecord
   validates :password, presence: { allow_blank: false }, if: :new_record?
 
   before_validation :set_username, on: :create
-  before_save :delete_pokemons
 
   enum :role, { trainer: 'trainer', admin: 'admin' }, default: :trainer, validate: true
 
@@ -73,9 +72,5 @@ class User < ApplicationRecord
 
   def set_username
     self.username = "#{first_name}_#{Random.hex(4)}" if username.blank?
-  end
-
-  def delete_pokemons
-    user_pokemons.all.destroy_all unless user_pokemons.all == user_pokemons
   end
 end
