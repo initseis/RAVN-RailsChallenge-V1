@@ -62,7 +62,7 @@ class TrainersController < ApplicationController
   def trainer_params
     params.require(:trainer)
           .permit(:first_name, :last_name, :email, :country_id,
-                  user_pokemons_attributes: %i[pokemon_id _destroy])
+                  user_pokemons_attributes: %i[id pokemon_id _destroy])
           .merge(image: params[:trainer][:image], image_url: params[:trainer][:image_url])
   end
 
