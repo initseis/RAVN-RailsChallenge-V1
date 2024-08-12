@@ -1,3 +1,3 @@
 # frozen_string_literal: true
 
-Pagy::DEFAULT[:limit] = 1
+Pagy::DEFAULT[:limit] = 2
