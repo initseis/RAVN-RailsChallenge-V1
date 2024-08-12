@@ -16,7 +16,7 @@ class Pokemon < ApplicationRecord
   validates :main_technique, presence: { allow_blank: false }
   validates :description, presence: { allow_blank: false }
 
-  before_validation :delete_duplicated_pokemon_countries
+  before_save :delete_duplicated_pokemon_countries
 
   enum :pokemon_type, { fire: 'fire', water: 'water', grass: 'grass', electric: 'electric' }, default: :fire,
                                                                                               validate: true
